@@ -1,0 +1,46 @@
+import("//build_overrides/common.gni")
+
+ 
+executable("uiresbuilder") { 
+  configs -= ["//build/config/win:unicode",]
+  configs += [ "//build/config:precompiled_headers" ]
+   
+
+  configs -= [ "//build/config/win:default_crt" ] 
+  configs += [ "//build/config/win:static_crt" ] 
+
+ 
+
+  sources = [
+    #include files
+    "tinyxml/tinystr.h",
+    "tinyxml/tinyxml.h",
+    "XGetopt.h",
+    
+    #source files  
+    "tinyxml/tinystr.cpp",
+    "tinyxml/tinyxml.cpp",
+    "tinyxml/tinyxmlerror.cpp",
+    "tinyxml/tinyxmlparser.cpp",
+    "residbuilder.cpp",
+    "XGetopt.cpp",
+  ]
+
+
+  if (is_win) {
+    cflags = [
+      #"/W3",  # Warning level 3. 
+      "/wd4476",
+    ]
+  }
+
+
+
+
+  defines  = [  "_CONSOLE", ]
+
+  include_dirs = [
+    ".",
+    "./tinyxml", 
+  ] 
+}

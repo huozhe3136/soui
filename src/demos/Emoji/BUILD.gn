@@ -1,0 +1,67 @@
+import("//build_overrides/common.gni") 
+
+
+ 
+
+executable("Emoji") {
+  configs += [ "//build/config:precompiled_headers" ]
+
+  configs -= [ "//build/config/win:console" ]
+  configs += [ "//build/config/win:windowed" ] 
+  
+  sources = [
+    #include files  
+    "MainDlg.h",
+    "resource.h", 
+    "FileHelper.h", 
+    "SVscrollbar.h",
+    "FaceList_soui.h",
+    "SMyImage.h",
+
+    "gif/SAniImgFrame.h",
+    "gif/SGifPlayer.cpp",
+    "gif/SGifPlayer.h",
+    "gif/SSkinAPNG.cpp",
+    "gif/SSkinAPNG.h",
+    "gif/SSkinGif.cpp",
+    "gif/SSkinGif.h", 
+    "gif/SMyGifPlayer.cpp",
+    "gif/SMyGifPlayer.h",
+
+    "Emoji.cpp",
+    "MainDlg.cpp", 
+    "FaceList_soui.cpp",
+    "SMyImage.cpp",
+    "Emoji.rc",
+    
+  ]
+
+  include_dirs = [
+    ".",
+    "../../config",
+    "../../soui/include",
+    "../../utilities/include",
+    "../../components",
+  ]
+
+  deps = [  
+    "../../utilities",
+    "../../SOUI",
+    "../../third-part",
+    "../../components",
+    "../../soui-sys-resource",
+    "../../../:preBuild_Emoji_resource",
+  ]
+
+
+  if (is_win) {
+    cflags = [
+      #"/W3",  # Warning level 3.
+      "/wd4201",
+      "/wd4239",
+    ]
+  }
+ 
+  defines = ["_CRT_SECURE_NO_WARNINGS","_USE_UI_LIBRAY",] 
+
+} 

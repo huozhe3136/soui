@@ -1,0 +1,2 @@
+﻿//使用LIB编译SOUI,UTILITES and COLL-MEM模块
+#define LIB_ALL
